@@ -1,5 +1,6 @@
 #include <iostream>
-#include <vector>
+#include <map>
+#include "lib/SkipList.h"
 
 int main() {
     size_t citiesCount;
@@ -18,12 +19,12 @@ int main() {
     std::cout << "Брой на директните връзки между градовете: ";
     std::cin >> directConnectionsCount;
 
-    std::vector<std::pair<std::string, std::string>> directConnections;
+    std::map<std::string, std::string> directConnections;
     std::cout << "Директни връзки: ";
     for (size_t i = 0; i < directConnectionsCount; ++i) {
         std::string city1, city2;
         std::cin >> city1 >> city2;
-        directConnections.push_back(std::make_pair(city1, city2));
+        directConnections[city1] = city2;
     }
 
     size_t wishlistCitiesCount;
@@ -37,6 +38,8 @@ int main() {
         std::cin >> city;
         wishlistCities.push_back(city);
     }
+
+    SkipList citiesList = SkipList(cities, directConnections);
 
     return 0;
 }
