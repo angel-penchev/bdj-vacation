@@ -63,11 +63,15 @@ Box *Box::searchBoxByNameInTree(std::string query) {
 }
 
 void Box::print() {
-    std::cout << this->name << std::endl;
+    std::cout << '[' << this->name << "] -> ( ";
     for (auto & souvenir : this->souveniers) {
-        std::cout << souvenir << std::endl;
+        std::cout << souvenir << " ";
     }
-    for (auto & boxe : this->boxes) {
-        boxe.print();
+    std::cout << ") {" << std::endl << "  ";
+
+    for (auto & box : this->boxes) {
+        box.print();
     }
+
+    std::cout << '}' << std::endl;
 }

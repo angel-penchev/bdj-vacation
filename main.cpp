@@ -58,8 +58,9 @@ int main() {
     }
 
     Box globalBox = Box(boxesListFile);
+//    globalBox.reorder();
     globalBox.print();
-    // Close the contents file
+
     boxesListFile.close();
 
     return 0;
