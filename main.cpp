@@ -26,5 +26,17 @@ int main() {
         directConnections.push_back(std::make_pair(city1, city2));
     }
 
+    size_t wishlistCitiesCount;
+    std::cout << "Брой на желаните градове: ";
+    std::cin >> wishlistCitiesCount;
+
+    std::vector<std::string> wishlistCities;
+    std::cout << "Имена на желаните градове: ";
+    for (size_t i = 0; i < wishlistCitiesCount; ++i) {
+        std::string city;
+        std::cin >> city;
+        wishlistCities.push_back(city);
+    }
+
     return 0;
 }

@@ -6,3 +6,5 @@ Plovdiv NovaZagora
 Dimitrovgrad NovaZagora
 StaraZagora Yambol
 NovaZagora Burgas
+3
+Plovdiv StaraZagora Yambol
