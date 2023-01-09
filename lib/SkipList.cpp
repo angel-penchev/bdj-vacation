@@ -3,6 +3,7 @@
 //
 
 #include "SkipList.h"
+#include <iostream>
 
 SkipList::SkipList(std::vector<std::string> cities, std::map<std::string, std::string> directConnections) {
     this->nodesCount = cities.size();
@@ -109,4 +110,33 @@ void SkipList::clear() {
     this->first = nullptr;
     this->last = nullptr;
     this->nodesCount = 0;
+}
+
+std::vector<std::string> SkipList::findQuickest(const SkipListNode *treeNode, std::queue<std::string> mustVisit, std::vector<std::string> path) {
+    if (mustVisit.empty()) {
+        return path;
+    }
+
+    if (treeNode == nullptr) {
+        return {};
+    }
+
+    path.push_back(treeNode->getValue());
+
+    if (treeNode->getValue() == mustVisit.front()) {
+        mustVisit.pop();
+    }
+
+    std::vector<std::string> routeFromNextCity = findQuickest(treeNode->getNext(), mustVisit, path);
+    std::vector<std::string> routeFromFastNextCity = findQuickest(treeNode->getFastNext(), mustVisit, path);
+
+    if (routeFromNextCity.empty()) {
+        return routeFromFastNextCity;
+    }
+
+    if (routeFromFastNextCity.empty()) {
+        return routeFromNextCity;
+    }
+
+    return routeFromNextCity.size() < routeFromFastNextCity.size() ? routeFromNextCity : routeFromFastNextCity;
 }

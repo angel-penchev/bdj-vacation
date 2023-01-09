@@ -31,15 +31,21 @@ int main() {
     std::cout << "Брой на желаните градове: ";
     std::cin >> wishlistCitiesCount;
 
-    std::vector<std::string> wishlistCities;
+    std::queue<std::string> wishlistCities;
     std::cout << "Имена на желаните градове: ";
     for (size_t i = 0; i < wishlistCitiesCount; ++i) {
         std::string city;
         std::cin >> city;
-        wishlistCities.push_back(city);
+        wishlistCities.push(city);
     }
 
     SkipList citiesList = SkipList(cities, directConnections);
+    std::vector<std::string> path = SkipList::findQuickest(citiesList.getFirst(), wishlistCities);
+
+    for (const std::string &city : path) {
+        std::cout << city << " ";
+    }
+    std::cout << std::endl;
 
     return 0;
 }

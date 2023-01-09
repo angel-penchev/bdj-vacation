@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <vector>
 #include <map>
+#include <queue>
 #include "SkipListNode.h"
 
 class SkipList {
@@ -24,6 +25,8 @@ public:
     SkipList & operator=(const SkipList &other);
 
     ~SkipList();
+
+    static std::vector<std::string> findQuickest(const SkipListNode *treeNode, std::queue<std::string> mustVisit, std::vector<std::string> path = {});
 
     size_t getNodesCount() const;
 
