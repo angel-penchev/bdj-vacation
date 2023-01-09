@@ -1,8 +1,11 @@
 #include <iostream>
 #include <map>
+#include <fstream>
 #include "lib/SkipList.h"
+#include "lib/Box.h"
 
 int main() {
+    // Part A
     size_t citiesCount;
     std::cout << "Брой на градовете през които преминава пътническия влак: ";
     std::cin >> citiesCount;
@@ -46,6 +49,18 @@ int main() {
         std::cout << city << " ";
     }
     std::cout << std::endl;
+
+
+    // Part C
+    std::ifstream boxesListFile("boxesList.txt", std::ios::in);
+    if (!boxesListFile) {
+        throw std::runtime_error("Could not open boxesList.txt for reading!");
+    }
+
+    Box globalBox = Box(boxesListFile);
+    globalBox.print();
+    // Close the contents file
+    boxesListFile.close();
 
     return 0;
 }
