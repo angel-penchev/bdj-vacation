@@ -12,12 +12,18 @@
 #include "SkipListNode.h"
 
 class SkipList {
-    std::size_t nodesCount;
-    SkipListNode *first;
-    SkipListNode *last;
+    std::size_t nodesCount{};
+    SkipListNode *first{};
+    SkipListNode *last{};
 
 public:
     explicit SkipList(std::vector<std::string> cities = {}, std::map<std::string, std::string> directConnections = {});
+
+    SkipList(const SkipList &other);
+
+    SkipList & operator=(const SkipList &other);
+
+    ~SkipList();
 
     size_t getNodesCount() const;
 
@@ -30,6 +36,10 @@ public:
     SkipListNode *getLast() const;
 
     void setLast(SkipListNode *last);
+
+    void copy(const SkipList &other);
+
+    void clear();
 };
 
 #endif //BDJ_VACATION_SKIPLIST_H

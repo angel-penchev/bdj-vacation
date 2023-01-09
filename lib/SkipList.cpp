@@ -30,6 +30,34 @@ SkipList::SkipList(std::vector<std::string> cities, std::map<std::string, std::s
     }
 }
 
+SkipList::SkipList(const SkipList &other) : nodesCount(other.nodesCount), first(), last() {
+    SkipListNode *current = other.first;
+    SkipListNode *previous = nullptr;
+    while (current != nullptr) {
+        auto *newNode = new SkipListNode(current->getValue());
+        if (previous != nullptr) {
+            previous->setNext(newNode);
+        } else {
+            this->first = newNode;
+        }
+        previous = newNode;
+        current = current->getNext();
+    }
+    this->last = previous;
+}
+
+SkipList &SkipList::operator=(const SkipList &other) {
+    if (this != &other) {
+        this->clear();
+        this->copy(other);
+    }
+    return *this;
+}
+
+SkipList::~SkipList() {
+    this->clear();
+}
+
 size_t SkipList::getNodesCount() const {
     return nodesCount;
 }
@@ -54,5 +82,31 @@ void SkipList::setLast(SkipListNode *last) {
     SkipList::last = last;
 }
 
-//SkipList::SkipList(const SkipList &other) {
-//}
+
+void SkipList::copy(const SkipList &other) {
+    SkipListNode *current = other.first;
+    SkipListNode *previous = nullptr;
+    while (current != nullptr) {
+        auto *newNode = new SkipListNode(current->getValue());
+        if (previous != nullptr) {
+            previous->setNext(newNode);
+        } else {
+            this->first = newNode;
+        }
+        previous = newNode;
+        current = current->getNext();
+    }
+    this->last = previous;
+}
+
+void SkipList::clear() {
+    SkipListNode *current = this->first;
+    while (current != nullptr) {
+        SkipListNode *next = current->getNext();
+        delete current;
+        current = next;
+    }
+    this->first = nullptr;
+    this->last = nullptr;
+    this->nodesCount = 0;
+}
